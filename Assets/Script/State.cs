@@ -8,6 +8,9 @@ namespace PPman
     public class State
     {
         private string name;
+        //protected 為限定存取：只有子屬關係才可以存取
+        protected Player player;
+        protected StateMachine statemachine;
         public void Enter()
         {
             Debug.Log($"<color=green>進入:{name}</color>");
