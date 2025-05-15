@@ -1373,7 +1373,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: -945034332, guid: cb6d8358589dabb409efeb960ac6d4cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1417,7 +1417,6 @@ MonoBehaviour:
   Att: 3
   Ani: {fileID: 282660033}
   Rig: {fileID: 282660038}
-  Col: {fileID: 282660037}
   CheckGroundSize: {x: 0.7, y: 0.3, z: 1}
   CheckGroundoffset: {x: 0, y: -1.2, z: 0}
   Layercanjump:
@@ -1497,6 +1496,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6182749bc544f9549b50901c08e0f84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 8
+  Jumpforce: 8
+  Att: 3
+  Ani: {fileID: 282660033}
+  Rig: {fileID: 282660038}
+  CheckGroundSize: {x: 1, y: 1, z: 1}
+  CheckGroundoffset: {x: 0, y: 0, z: 0}
+  Layercanjump:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &293154751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2025,12 +2034,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 88.19681, y: -2.9759593}
+    - - {x: 90.97886, y: -6.429828}
       - {x: 91.17929, y: -27.726715}
       - {x: 141.34096, y: -28.574856}
       - {x: 138.56953, y: 20.530571}
-      - {x: -11.114332, y: 19.893295}
-      - {x: -12.630552, y: -6.4354773}
+      - {x: -12.420137, y: 20.328564}
+      - {x: -12.575035, y: -6.693904}
   m_UseDelaunayMesh: 0
 --- !u!4 &443049388
 Transform:
@@ -48992,7 +49001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081514133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5047333, y: -1.7342199, z: -10}
+  m_LocalPosition: {x: -3.4033186, y: -2.2904599, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

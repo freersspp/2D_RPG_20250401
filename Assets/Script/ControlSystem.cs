@@ -8,7 +8,7 @@ public class ControlSystem : MonoBehaviour
     [SerializeField] float Att = 3.0f;
     [SerializeField] private Animator Ani;
     [SerializeField] private Rigidbody2D Rig;
-    [SerializeField] private CapsuleCollider2D Col;
+    
     [Header("檢查地板資料")]
     [SerializeField] private Vector3 CheckGroundSize = Vector3.one;
     [SerializeField] private Vector3 CheckGroundoffset;
@@ -41,13 +41,6 @@ public class ControlSystem : MonoBehaviour
         }
         Ani.SetBool("是否在地板上", isground);
         Ani.SetFloat("跳躍", Rig.velocity.y);
-
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-
-            Col.size = new Vector2(Col.size.x, 1.25f);
-        }
-                Ani.SetFloat("蹲下", Col.size.y);
 
         //如果h值 < 0.1就跳出迴圈
         if (Mathf.Abs(h) < 0.1)
