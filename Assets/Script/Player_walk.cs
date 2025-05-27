@@ -5,7 +5,7 @@ namespace PPman
     /// 玩家走路
     /// </summary>
 
-    public class Player_walk : State
+    public class Player_walk : PlayGround
     {
         public Player_walk(Player _player, StateMachine _stateMachine, string _name) : base(_player, _stateMachine, _name)
         {

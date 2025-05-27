@@ -14,6 +14,10 @@ namespace PPman
         public override void Enter()
         {
             base.Enter();
+            player.Setvelocity(new Vector2(player.Rig.velocity.x, player.Jumpforce));
+            player.Ani.SetBool("是否在地板上", false);
+            player.Ani.SetFloat("跳躍", 1);
+
         }
 
         public override void Exit()
@@ -25,6 +29,11 @@ namespace PPman
         {
             base.Update();
 
+           if(player.Rig.velocity.y < 0)
+            {
+                statemachine.Switchstate(player.player_fall);
+            }
+            
 
         }
     }

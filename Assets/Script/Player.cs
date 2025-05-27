@@ -59,6 +59,7 @@ namespace PPman
         {
             //狀態機開始持續更新
             statemachine.Updatestate();
+            
         }
 
         /// <summary>
@@ -85,6 +86,13 @@ namespace PPman
             float angle = h > 0 ? 0 : 180;
             transform.eulerAngles = new Vector3(0, angle, 0);
         }
+
+        public bool Isgrounded()
+        {
+            return Physics2D.OverlapBox(transform.position + CheckGroundoffset, CheckGroundSize, 0, Layercanjump);
+        }
+
+
     }
 
 

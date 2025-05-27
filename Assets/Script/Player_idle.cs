@@ -5,7 +5,7 @@ namespace PPman
     /// 玩家待機
     /// </summary>
 
-    public class Player_idle : State
+    public class Player_idle : PlayGround
     {
         public Player_idle(Player _player, StateMachine _stateMachine, string _name) : base(_player, _stateMachine, _name)
         {
