@@ -6,8 +6,8 @@ public class ControlSystem : MonoBehaviour
     [SerializeField, Range(0, 50)] private float moveSpeed = 8.0f;
     [SerializeField, Range(0, 50)] float Jumpforce = 8.0f;
     [SerializeField] float Att = 3.0f;
-    [SerializeField] private Animator Ani;
-    [SerializeField] private Rigidbody2D Rig;
+    private Animator Ani;
+    private Rigidbody2D Rig;
     
     [Header("檢查地板資料")]
     [SerializeField] private Vector3 CheckGroundSize = Vector3.one;
