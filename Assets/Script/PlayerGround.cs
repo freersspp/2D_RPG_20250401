@@ -26,6 +26,10 @@ namespace PPman
             {
                 statemachine.Switchstate(player.player_jump);
             }
+            if(player.Isgrounded() && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                statemachine.Switchstate(player.player_attack);
+            }
         }
     }
 }

@@ -8,10 +8,13 @@ namespace PPman
     {
         //開頭加field:後, 尾巴加{ get; private set; }可以重新設定唯獨模式
         #region 變數
-        [field:Header("基本資料")]
-        [field:SerializeField, Range(0, 50)] public float moveSpeed { get; private set; } = 8.0f;
-        [field:SerializeField, Range(0, 50)] public float Jumpforce { get; private set; } = 8.0f;
-        [SerializeField] float Att = 3.0f;
+        [field: Header("基本資料")]
+        [field: SerializeField, Range(0, 50)] public float moveSpeed { get; private set; } = 8.0f;
+        [field: SerializeField, Range(0, 50)] public float Jumpforce { get; private set; } = 8.0f;
+        [field: SerializeField, Range(0, 3)] public float 攻擊間段時間 { get; private set; } = 1;
+        [field: SerializeField] public float[] 攻擊動畫時間 { get; private set; }
+
+
         //利用字尾{ get; private set; }讓該參數外部可以讀取但是無法修改(保護資料,僅限讀取)
         public Animator Ani { get; private set; }
         public Rigidbody2D Rig { get; private set; }
@@ -59,7 +62,7 @@ namespace PPman
         {
             //狀態機開始持續更新
             statemachine.Updatestate();
-            
+
         }
 
         /// <summary>
