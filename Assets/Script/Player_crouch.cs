@@ -18,6 +18,7 @@ namespace PPman
         public override void Exit()
         {
             base.Exit();
+            player.Ani.SetBool("是否在地板上", true);
         }
 
         public override void Update()
