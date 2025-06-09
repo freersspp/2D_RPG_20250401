@@ -33,7 +33,7 @@ namespace PPman
 
             if (player.Isgrounded() && Input.GetKeyDown(KeyCode.S))
             {
-                statemachine.Switchstate(player.Player_crouch);
+                statemachine.Switchstate(player.Player_crouchwalk);
             }
         }
     }

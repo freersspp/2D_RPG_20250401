@@ -32,7 +32,7 @@ namespace PPman
         public Player_jump player_jump { get; private set; }
         public Player_fall player_fall { get; private set; }
         public Player_attack player_attack { get; private set; }
-        public Player_crouch Player_crouch { get; private set; }
+        public Player_crouchWalk Player_crouchwalk { get; private set; }
         #endregion
 
         //用程式自動在腳色底下繪製一個地板偵測器
@@ -54,7 +54,7 @@ namespace PPman
             player_jump = new Player_jump(this, statemachine, "跳躍");
             player_fall = new Player_fall(this, statemachine, "掉落");
             player_attack = new Player_attack(this, statemachine, "攻擊");
-            Player_crouch = new Player_crouch(this, statemachine, "蹲下");
+            Player_crouchwalk = new Player_crouchWalk(this, statemachine, "蹲下行走");
 
             //狀態機 指定"預設狀態"為"待機"
             statemachine.Defaultstate(player_idle);
