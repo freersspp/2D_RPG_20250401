@@ -26,7 +26,7 @@ namespace PPman
         {
             base.Update();
             //當玩家的水平加速度(h)不等於0時, 切換到走路狀態
-            if(h != 0)
+            if(h != 0 && player.canmove)
             {
                 statemachine.Switchstate(player.player_walk);
             }

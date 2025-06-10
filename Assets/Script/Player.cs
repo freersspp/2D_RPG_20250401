@@ -19,6 +19,11 @@ namespace PPman
         public Animator Ani { get; private set; }
         public Rigidbody2D Rig { get; private set; }
 
+        public bool canmove { get;set; } = false;
+        public bool canjump { get; set; } = false;
+        public bool canattack { get; set;} = false;
+        public bool cancrouch { get; set; } = false;
+
         [Header("檢查地板資料")]
         [SerializeField] private Vector3 CheckGroundSize = Vector3.one;
         [SerializeField] private Vector3 CheckGroundoffset;
@@ -59,6 +64,8 @@ namespace PPman
             //狀態機 指定"預設狀態"為"待機"
             statemachine.Defaultstate(player_idle);
 
+            //TestcanControl();
+
         }
         private void Update()
         {
@@ -97,7 +104,13 @@ namespace PPman
             return Physics2D.OverlapBox(transform.position + CheckGroundoffset, CheckGroundSize, 0, Layercanjump);
         }
 
-
+        //開啟控制模式
+        private void TestcanControl()
+        {
+            canmove = true;
+            canjump = true;
+            cancrouch = true;
+        }
     }
 
 

@@ -22,16 +22,16 @@ namespace PPman
         {
             base.Update();
 
-            if (player.Isgrounded() && Input.GetKeyDown(KeyCode.Space))
+            if (player.canjump && player.Isgrounded() && Input.GetKeyDown(KeyCode.Space))
             {
                 statemachine.Switchstate(player.player_jump);
             }
-            if (player.Isgrounded() && Input.GetKeyDown(KeyCode.Mouse0))
+            if (player.canattack && player.Isgrounded() && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 statemachine.Switchstate(player.player_attack);              
             }
 
-            if (player.Isgrounded() && Input.GetKeyDown(KeyCode.S))
+            if (player.cancrouch && player.Isgrounded() && Input.GetKeyDown(KeyCode.S))
             {
                 statemachine.Switchstate(player.Player_crouchwalk);
             }
