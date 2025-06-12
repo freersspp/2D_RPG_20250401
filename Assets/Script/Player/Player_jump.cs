@@ -5,7 +5,7 @@ namespace PPman
     /// 玩家跳躍
     /// </summary>
 
-    public class Player_jump : State
+    public class Player_jump : PlayerState
     {
         public Player_jump(Player _player, StateMachine _stateMachine, string _name) : base(_player, _stateMachine, _name)
         {

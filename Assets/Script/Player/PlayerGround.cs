@@ -2,7 +2,7 @@
 
 namespace PPman
 {
-    public class PlayGround : State
+    public class PlayGround : PlayerState
     {
         public PlayGround(Player _player, StateMachine _stateMachine, string _name) : base(_player, _stateMachine, _name)
         {
@@ -35,6 +35,7 @@ namespace PPman
             {
                 statemachine.Switchstate(player.Player_crouchwalk);
             }
+            
         }
     }
 }
