@@ -15,6 +15,7 @@ namespace PPman
         public override void Enter()
         {
             base.Enter();
+            player.Ani.SetBool("是否在地板上", true);
             player.Ani.SetFloat("蹲下移動", 0);
             player.Ani.SetFloat("移動", 0);
             player.GetComponent<CapsuleCollider2D>().size = new Vector2(0.75f,2.3f);
