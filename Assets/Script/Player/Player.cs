@@ -110,6 +110,20 @@ namespace PPman
             canmove = true;
             canjump = true;
             cancrouch = true;
+            canattack = true;
+        }
+        /// <summary>
+        /// 切換控制玩家
+        /// </summary>
+        /// <param name="canControl">能不能控制</param>
+        public void SwitchControl(bool canControl)
+        {
+            Rig.velocity = Vector3.zero;
+            statemachine.Switchstate(player_idle);
+            canmove = canControl;
+            canjump = canControl;
+            cancrouch = canControl;
+            canattack=canControl;
         }
     }
 

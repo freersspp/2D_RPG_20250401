@@ -15,11 +15,18 @@ namespace PPman
         public override void Enter()
         {
             base.Enter();
+            player.Ani.SetFloat("蹲下移動", 0);
+            player.Ani.SetFloat("移動", 0);
+            player.GetComponent<CapsuleCollider2D>().size = new Vector2(0.75f,2.3f);
+            player.GetComponent<CapsuleCollider2D>().offset = new Vector2(0f, 0f);
+            player.Rig.constraints = UnityEngine.RigidbodyConstraints2D.FreezeAll;
+
         }
 
         public override void Exit()
         {
             base.Exit();
+            player.Rig.constraints = UnityEngine.RigidbodyConstraints2D.FreezeRotation;
         }
 
         public override void Update()

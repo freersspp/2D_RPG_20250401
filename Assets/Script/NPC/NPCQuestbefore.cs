@@ -22,6 +22,16 @@ namespace PPman
         public override void Update()
         {
             base.Update();
+
+            //如果玩家在範圍內 並且 按下"F"鍵就傳訊息給NPC對話系統
+            if(npc.playerinarea && Input.GetKeyDown(KeyCode.F))
+            {
+                npc.flowchart.SendFungusMessage("任務前");
+            }
+            if( Timer > 1)
+            {
+                statemachine.Switchstate(npc.npcQuseting);
+            }
         }
     }
 }
