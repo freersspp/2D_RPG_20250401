@@ -26,6 +26,11 @@ namespace PPman
             {
                 npc.flowchart.SendFungusMessage("任務中");
             }
+
+            if(npc.已取得任務道具數量 >= npc.任務道具需求數量)
+            {
+                statemachine.Switchstate(npc.npcQusetfinish);
+            }
         }
     }
 }

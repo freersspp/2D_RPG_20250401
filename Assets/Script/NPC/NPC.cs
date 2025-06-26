@@ -13,6 +13,10 @@ namespace PPman
         [SerializeField] private Vector3 offsetinteraction;
         private CanvasGroup groupInteraction;
         private WorktoUIpoint uiInteraction;
+        public bool isTalkbefore { get; set; }
+
+        public int 已取得任務道具數量 { get; set; }
+        public int 任務道具需求數量 { get; set; } = 5;
         private void Awake()
         {
             flowchart = GetComponent<Flowchart>();
@@ -31,6 +35,9 @@ namespace PPman
             {
                 uiInteraction.UpdatePosition(transform, offsetinteraction);
             }
+#if UNITY_EDITOR
+            Test_任務道具數量增加();
+#endif
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -57,6 +64,16 @@ namespace PPman
             }
 
         }
+#if UNITY_EDITOR
+        private void Test_任務道具數量增加()
+        {
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                已取得任務道具數量++;
+                Debug.Log($"道具數量{已取得任務道具數量}");
+            }
+        }
+#endif
     }
 
 }

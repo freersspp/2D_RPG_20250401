@@ -36,7 +36,7 @@ namespace PPman
             player.Ani.SetFloat("蹲下移動", Mathf.Abs(h));
             //腳色角度 
             player.Flip(h);
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 statemachine.Switchstate(player.player_idle);
             

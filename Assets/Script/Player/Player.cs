@@ -4,7 +4,7 @@ namespace PPman
     /// <summary>
     /// 玩家:儲存玩家資料與基本功能
     /// </summary>
-    public class Player : MonoBehaviour
+    public class Player : Character
     {
         //開頭加field:後, 尾巴加{ get; private set; }可以重新設定唯獨模式
         #region 變數
@@ -15,19 +15,19 @@ namespace PPman
         [field: SerializeField] public float[] 攻擊動畫時間 { get; private set; }
 
 
-        //利用字尾{ get; private set; }讓該參數外部可以讀取但是無法修改(保護資料,僅限讀取)
-        public Animator Ani { get; private set; }
-        public Rigidbody2D Rig { get; private set; }
 
-        public bool canmove { get;set; } = false;
+
+        public bool canmove { get; set; } = false;
         public bool canjump { get; set; } = false;
-        public bool canattack { get; set;} = false;
+        public bool canattack { get; set; } = false;
         public bool cancrouch { get; set; } = false;
 
         [Header("檢查地板資料")]
         [SerializeField] private Vector3 CheckGroundSize = Vector3.one;
         [SerializeField] private Vector3 CheckGroundoffset;
         [SerializeField] private LayerMask Layercanjump;
+
+
         #endregion
 
         #region 狀態資料
@@ -47,11 +47,9 @@ namespace PPman
             Gizmos.DrawCube(transform.position + CheckGroundoffset, CheckGroundSize);
         }
 
-        private void Awake()
+        protected override void Awake()
         {
-            Ani = GetComponent<Animator>();
-            Rig = GetComponent<Rigidbody2D>();
-
+            base.Awake();
             statemachine = new StateMachine();
             //this 為"類別",將Player帶入自己狀態
             player_idle = new Player_idle(this, statemachine, "待機");
@@ -74,30 +72,7 @@ namespace PPman
 
         }
 
-        /// <summary>
-        /// 設定水平加速度
-        /// </summary>
-        /// <param name="velocity">水平加速度</param>
-        public void Setvelocity(Vector3 velocity)
-        {
-            Rig.velocity = velocity;
-        }
-        /// <summary>
-        /// 設定腳色角度
-        /// </summary>
-        /// <param name="h">腳色角度</param>
-        public void Flip(float h)
-        {
-            //如果h值 < 0.1就跳出迴圈
-            if (Mathf.Abs(h) < 0.1)
-            {
-                return;
-            }
-            //讓2D腳色顯示面向前面還是後面
-            //設定angle 角度判斷角度(h) 改變腳色面對方向(Y軸數值)
-            float angle = h > 0 ? 0 : 180;
-            transform.eulerAngles = new Vector3(0, angle, 0);
-        }
+
 
         public bool Isgrounded()
         {
@@ -123,7 +98,7 @@ namespace PPman
             canmove = canControl;
             canjump = canControl;
             cancrouch = canControl;
-            canattack=canControl;
+            canattack = canControl;
         }
     }
 

@@ -1,30 +1,30 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 namespace PPman
 {
     public class Fadesystem : MonoBehaviour
     {
         /// <summary>
-        /// ²H¤J²H¥X
+        /// æ·¡å…¥æ·¡å‡º
         /// </summary>
-        /// <param name="group">µe¥¬¸s²Õ³z©ú«×</param>
-        /// <param name="¬O§_²H¤J">¬O§_²H¤J</param>
+        /// <param name="group">ç•«å¸ƒç¾¤çµ„é€æ˜åº¦</param>
+        /// <param name="æ˜¯å¦æ·¡å…¥">æ˜¯å¦æ·¡å…¥</param>
         /// <returns></returns>
         
 
-        public static IEnumerator Fade(CanvasGroup group, bool ¬O§_²H¤J = true)
+        public static IEnumerator Fade(CanvasGroup group, bool æ˜¯å¦æ·¡å…¥ = true)
         {
-            //Åı"¼W¥[­È"¨Ó±±¨î¬O§_²H¤J²H¥X ¼W´î­È¬°0.1
-            float ¼W¥[­È = ¬O§_²H¤J ? +0.1f : -0.1f;
+            //è®“"å¢åŠ å€¼"ä¾†æ§åˆ¶æ˜¯å¦æ·¡å…¥æ·¡å‡º å¢æ¸›å€¼ç‚º0.1
+            float å¢åŠ å€¼ = æ˜¯å¦æ·¡å…¥ ? +0.1f : -0.1f;
 
-            //¥Î°j°é­«½Æ°õ¦æ10¦¸
+            //ç”¨è¿´åœˆé‡è¤‡åŸ·è¡Œ10æ¬¡
             for (int i = 0; i < 10 ; i++)
             {
-                //³z©ú«×ÀH®É¶¡»¼¼W/»¼´î
-                group.alpha += ¼W¥[­È;
+                //é€æ˜åº¦éš¨æ™‚é–“éå¢/éæ¸›
+                group.alpha += å¢åŠ å€¼;
 
-                //º¥ÅÜ®É¶¡³]©w¬°0.03¬í
-                yield return new WaitForSeconds(0.03f);
+                //æ¼¸è®Šæ™‚é–“è¨­å®šç‚º0.0001ç§’
+                yield return new WaitForSeconds(0.0001f);
 
             }
 

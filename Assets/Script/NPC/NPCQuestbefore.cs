@@ -28,7 +28,7 @@ namespace PPman
             {
                 npc.flowchart.SendFungusMessage("任務前");
             }
-            if( Timer > 1)
+            if (npc.isTalkbefore)
             {
                 statemachine.Switchstate(npc.npcQuseting);
             }
