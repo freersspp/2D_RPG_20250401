@@ -6,13 +6,15 @@ namespace PPman
         public Player_crouchWalk(Player _player, StateMachine _stateMachine, string _name) : base(_player, _stateMachine, _name)
         {
         }
+        private CapsuleCollider2D collider;
 
         public override void Enter()
         {
             base.Enter();
 
-            player.GetComponent<CapsuleCollider2D>().size = new Vector2(0.85f, 1.15f);
-            player.GetComponent<CapsuleCollider2D>().offset = new Vector2(0f, -0.6f);
+            collider = player.GetComponent<CapsuleCollider2D>();
+            collider.size = new Vector2(0.85f, 1.15f);
+            collider.offset = new Vector2(0f, -0.6f);
             player.Ani.SetFloat("蹲下移動", 0);
             player.Ani.SetBool("觸發蹲下", false);
         }
@@ -36,10 +38,10 @@ namespace PPman
             player.Ani.SetFloat("蹲下移動", Mathf.Abs(h));
             //腳色角度 
             player.Flip(h);
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W) && player.CanStandUp())
             {
                 statemachine.Switchstate(player.player_idle);
-            
+
             }
 
         }

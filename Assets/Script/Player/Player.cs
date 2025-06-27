@@ -27,6 +27,12 @@ namespace PPman
         [SerializeField] private Vector3 CheckGroundoffset;
         [SerializeField] private LayerMask Layercanjump;
 
+        [Header("檢查頭頂資料")]
+        [SerializeField] private Vector3 確認大小 = Vector3.one;
+        [SerializeField] private Vector3 確認公差;
+        [SerializeField] private LayerMask Layercanstandup;
+
+
 
         #endregion
 
@@ -45,7 +51,10 @@ namespace PPman
         {
             Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.9f);
             Gizmos.DrawCube(transform.position + CheckGroundoffset, CheckGroundSize);
+            Gizmos.DrawCube(transform.position + 確認公差, 確認大小);
         }
+
+        
 
         protected override void Awake()
         {
@@ -77,6 +86,11 @@ namespace PPman
         public bool Isgrounded()
         {
             return Physics2D.OverlapBox(transform.position + CheckGroundoffset, CheckGroundSize, 0, Layercanjump);
+        }
+
+        public bool CanStandUp()
+        {
+            return !Physics2D.OverlapBox(transform.position + 確認公差, 確認大小, 0, Layercanstandup);
         }
 
         //開啟控制模式

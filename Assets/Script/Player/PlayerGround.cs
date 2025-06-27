@@ -22,7 +22,7 @@ namespace PPman
         {
             base.Update();
 
-            if (player.canjump && player.Isgrounded() && Input.GetKeyDown(KeyCode.Space))
+            if (player.canjump && player.Isgrounded() && Input.GetKeyDown(KeyCode.Space) && player.CanStandUp())
             {
                 statemachine.Switchstate(player.player_jump);
             }
