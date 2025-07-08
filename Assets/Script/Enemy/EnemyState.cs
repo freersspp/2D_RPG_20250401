@@ -14,6 +14,21 @@ namespace PPman
 
         }
 
+        public override void Enter()
+        {
+            base.Enter();
+            Debug.Log($"<color=red>進入:{name}</color>");
+        }
 
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace PPman
         public override void Enter()
         {
             base.Enter();
+            enemy.Ani.SetTrigger("觸發攻擊");
         }
 
         public override void Exit()

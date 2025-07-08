@@ -20,7 +20,7 @@ namespace PPman
         //virtual 虛擬:允許子類別覆寫(override)
         public virtual void Enter()
         {
-            Debug.Log($"<color=green>進入:{name}</color>");
+            //Debug.Log($"<color=green>進入:{name}</color>");
             //計時器歸零
             Timer = 0f;
         }
