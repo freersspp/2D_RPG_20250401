@@ -7,11 +7,31 @@ namespace PPman
         //利用字尾{ get; private set; }讓該參數外部可以讀取但是無法修改(保護資料,僅限讀取)
         public Animator Ani { get; private set; }
         public Rigidbody2D Rig { get; private set; }
+        [SerializeField, Range(0, 1000)] protected float hpmax = 100;
+        [SerializeField, Header("會讓自己受傷的物件標籤")] private string DamageObjectTag;
+
+        protected float hp;
 
         protected virtual void Awake()
         {
             Ani = GetComponent<Animator>();
             Rig = GetComponent<Rigidbody2D>();
+            hp = hpmax;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            //如果 血量 <= 0 就跳出
+            if(hp <= 0)
+            {
+                return;
+            }
+
+            //如果碰到的物件標籤是"DamageObjectTag"才會受傷
+            if (collision.CompareTag(DamageObjectTag))
+            {
+                Damage(collision.GetComponent<AttackArea>().attack);
+            }
         }
 
         /// <summary>
@@ -37,6 +57,23 @@ namespace PPman
             //設定angle 角度判斷角度(h) 改變腳色面對方向(Y軸數值)
             float angle = h > 0 ? 0 : 180;
             transform.eulerAngles = new Vector3(0, angle, 0);
+        }
+        /// <summary>
+        /// 受傷扣血
+        /// </summary>
+        /// <param name="damage">傷害值</param>
+        private void Damage(float damage)
+        {
+            hp -= damage;
+            Debug.Log($"<color=blue>{name} 受傷 , 血量: {hp}</color>");
+            if (hp <= 0)
+            {
+                Dead();
+            }
+        }
+        protected virtual void Dead()
+        {
+            Debug.Log($"<color=green>{name}死亡!</color>");
         }
 
 

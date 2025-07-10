@@ -39,10 +39,10 @@ namespace PPman
                 statemachine.Switchstate(enemy.enemyIdle);
             }
 
-            //如果確認前方有玩家就進入攻擊狀態
+            //如果確認前方有玩家就進入追蹤狀態
             if (enemy.IsPlayerFront())
             {
-                statemachine.Switchstate(enemy.enemyAttack);
+                statemachine.Switchstate(enemy.enemyFollow);
             }
 
         }

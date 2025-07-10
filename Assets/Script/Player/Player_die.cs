@@ -2,19 +2,17 @@
 namespace PPman
 {
 
-    public class EnemyDie : EnemyState
+    public class Player_die : PlayerState
     {
-        public EnemyDie(Enemy _enemy, StateMachine _stateMachine, string _name) : base(_enemy, _stateMachine, _name)
+        public Player_die(Player _player, StateMachine _stateMachine, string _name) : base(_player, _stateMachine, _name)
         {
-
         }
 
         public override void Enter()
         {
             base.Enter();
-            enemy.Ani.SetTrigger("觸發死亡");
-            enemy.Setvelocity(Vector3.zero);
-
+            player.Ani.SetTrigger("觸發死亡");
+            player.Setvelocity(Vector3.right * 0 + Vector3.up * player.Rig.velocity.y);
         }
 
         public override void Exit()
