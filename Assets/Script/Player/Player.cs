@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 namespace PPman
 {
     /// <summary>
@@ -45,6 +47,8 @@ namespace PPman
         public Player_attack player_attack { get; private set; }
         public Player_crouchWalk Player_crouchwalk { get; private set; }
         public Player_die player_Die { get; private set; }
+        private WorktoUIpoint WorktoUIpointHP;
+        [SerializeField] private Vector3 offsetHP;
 
         #endregion
 
@@ -74,6 +78,11 @@ namespace PPman
 
             //狀態機 指定"預設狀態"為"待機"
             statemachine.Defaultstate(player_idle);
+
+            ImgHP = GameObject.Find("圖片_血條").GetComponent<Image>();
+            ImgHPeven = GameObject.Find("圖片_血條_效果").GetComponent<Image>();
+            
+
 
             //TestcanControl();
 

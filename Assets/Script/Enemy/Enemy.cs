@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace PPman
 {
 
@@ -11,6 +14,10 @@ namespace PPman
         [field: SerializeField, Range(3, 8)] public float followspeed { get; private set; } = 4f;
         [field: SerializeField, Range(1, 3)] public float attackdistance { get; private set; } = 1f;
         [field: SerializeField] public float attacktime { get; private set; } = 1.5f;
+        [SerializeField] private GameObject prefabhp;
+        private Transform groupEnemyHP;
+
+
 
         #region 確認周遭環境資料
         /// <summary>
@@ -43,8 +50,9 @@ namespace PPman
         public EnemyWalk enemyWalk { get; private set; }
         public EnemyDie enemyDie { get; private set; }
         public Transform player { get; private set; }
-        
-
+        private CanvasGroup groupHP;
+        private WorktoUIpoint WorktoUIpointHP;
+        [SerializeField] private Vector3 offsetHP;
 
 
         private void OnDrawGizmos()
@@ -72,12 +80,21 @@ namespace PPman
             enemyDie = new EnemyDie(this, stateMachine, "敵人死亡");
 
             stateMachine.Defaultstate(enemyIdle);
+            groupEnemyHP = GameObject.Find("群組_敵人血條_全部").transform;
+            //生成"群組_敵人血條_全部", 並將"群組_敵人血條_全部"當成父物件
+            Transform enemyhp = Instantiate(prefabhp, groupEnemyHP).transform;
+            groupHP = enemyhp.GetComponent<CanvasGroup>();
+            WorktoUIpointHP = enemyhp.GetComponent<WorktoUIpoint>();
+
+            //Find("名稱")透過名稱尋找子物件
+            ImgHPeven = enemyhp.Find("圖片_血條_效果").GetComponent<Image>();
+            ImgHP = enemyhp.Find("圖片_血條").GetComponent<Image>();
+
         }
         private void Update()
         {
              stateMachine.Updatestate();
-            //Debug.Log($"前方是否有牆壁:{IsWallFront()}");
-            //Debug.Log($"前方是否有地板:{IsGroundFront()}");
+            WorktoUIpointHP.UpdatePosition(transform, offsetHP);
         }
         /// <summary>
         /// 確認前方有沒有牆壁
@@ -104,10 +121,23 @@ namespace PPman
             return Physics2D.OverlapBox(transform.position + transform.TransformDirection(checkplayeroffset), checkplayer, 0, layerplayer);
         }
 
+        protected override void Damage(float damage)
+        {
+            base.Damage(damage);
+            StartCoroutine(Fadesystem.Fade(groupHP));
+        }
+
         protected override void Dead()
         {
             base.Dead();
             stateMachine.Switchstate(enemyDie);
+            StartCoroutine(Delayfadeout());
+        }
+
+        private IEnumerator Delayfadeout()
+        {
+            yield return new WaitForSeconds(0.3f);
+            StartCoroutine(Fadesystem.Fade(groupHP, false));
         }
 
     }

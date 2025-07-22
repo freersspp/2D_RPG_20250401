@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace PPman
 {
 
@@ -11,6 +14,7 @@ namespace PPman
         [SerializeField, Header("會讓自己受傷的物件標籤")] private string DamageObjectTag;
 
         protected float hp;
+        protected Image ImgHP, ImgHPeven;
 
         protected virtual void Awake()
         {
@@ -62,15 +66,37 @@ namespace PPman
         /// 受傷扣血
         /// </summary>
         /// <param name="damage">傷害值</param>
-        private void Damage(float damage)
+        protected virtual void Damage(float damage)
         {
+            StartCoroutine(HPDamageEffect(hp, damage));
             hp -= damage;
+            Hpeffect();
             Debug.Log($"<color=blue>{name} 受傷 , 血量: {hp}</color>");
             if (hp <= 0)
             {
                 Dead();
             }
         }
+
+        private IEnumerator HPDamageEffect(float hpOriginal, float damage)
+        {
+            float count = 20;//執行的次數
+            float reduce = damage / count;//算出每次扣的值
+
+            for(int i = 0; i < count; i++)//迴圈執行 count 次
+            {
+                hpOriginal -= reduce;//每次扣的值
+                ImgHPeven.fillAmount = hpOriginal / hpmax;//更新受傷圖片填滿
+                yield return new WaitForSeconds(0.03f);//數字為每次等待秒數(0.01秒)
+            }
+
+        }
+
+        private void Hpeffect()
+        {
+            ImgHP.fillAmount = hp / hpmax;
+        }
+
         protected virtual void Dead()
         {
             Debug.Log($"<color=green>{name}死亡!</color>");

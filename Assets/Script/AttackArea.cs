@@ -4,6 +4,6 @@ namespace PPman
 
     public class AttackArea : MonoBehaviour
     {
-        [field: SerializeField, Header("§ğÀ»¤O"), Range(10, 100)] public float attack { get; private set; } = 20;
+        [field: SerializeField, Header("§ğÀ»¤O"), Range(10, 100)] public float attack { get; private set; } = 50;
     }
 }
