@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace PPman
@@ -52,6 +53,8 @@ namespace PPman
 
         #endregion
 
+        private CanvasGroup groupBlack;
+
         //用程式自動在腳色底下繪製一個地板偵測器
         private void OnDrawGizmos()
         {
@@ -81,6 +84,7 @@ namespace PPman
 
             ImgHP = GameObject.Find("圖片_血條").GetComponent<Image>();
             ImgHPeven = GameObject.Find("圖片_血條_效果").GetComponent<Image>();
+            groupBlack = GameObject.Find("玩家死亡黑幕").GetComponent<CanvasGroup>();
             
 
 
@@ -126,6 +130,26 @@ namespace PPman
             canjump = canControl;
             cancrouch = canControl;
             canattack = canControl;
+        }
+
+        protected override void Damage(float damage)
+        {
+            base.Damage(damage);
+            CameraManager.Instance.startshakeCamera(0.8f, 3, 0.3f);
+        }
+
+        protected override void Dead()
+        {
+            base.Dead();
+            statemachine.Switchstate(player_Die);
+            StartCoroutine(DelayfadeinBlack());
+            CameraManager.Instance.startshakeCamera(1.5f, 1, 0.2f);
+        }
+
+        private IEnumerator DelayfadeinBlack()
+        {
+            yield return new WaitForSeconds(1);
+            StartCoroutine(Fadesystem.Fade(groupBlack));
         }
     }
 

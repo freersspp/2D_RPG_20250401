@@ -14,6 +14,11 @@ namespace PPman
             base.Enter();
             enemy.Ani.SetTrigger("觸發死亡");
             enemy.Setvelocity(Vector3.zero);
+            //如果隨機值 小於等於 掉落機率 就生成掉落物
+            if(Random.value <= enemy.dropProbability)
+            {
+                enemy.spawnDrop();
+            }
 
         }
 

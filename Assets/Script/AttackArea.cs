@@ -1,9 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 namespace PPman
 {
 
     public class AttackArea : MonoBehaviour
     {
-        [field: SerializeField, Header("§ðÀ»¤O"), Range(10, 100)] public float attack { get; private set; } = 50;
+        [field: SerializeField, Header("æ”»æ“ŠåŠ›"), Range(10, 100)] public float attack { get; private set; } = 30
+            ;
     }
 }

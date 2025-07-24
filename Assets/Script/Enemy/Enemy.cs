@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,7 +44,7 @@ namespace PPman
         [field: SerializeField] private LayerMask layerplayer;
         #endregion
 
-        public StateMachine stateMachine {  get; private set; }
+        public StateMachine stateMachine { get; private set; }
         public EnemyIdle enemyIdle { get; private set; }
         public EnemyFollow enemyFollow { get; private set; }
         public EnemyAttack enemyAttack { get; private set; }
@@ -53,6 +54,20 @@ namespace PPman
         private CanvasGroup groupHP;
         private WorktoUIpoint WorktoUIpointHP;
         [SerializeField] private Vector3 offsetHP;
+
+        [field: Header("掉落道具")]
+        [field: SerializeField, Range(0, 1)]
+        public float dropProbability { get; private set; } = 0.9f;
+        [field: SerializeField] public GameObject prefabDrop;
+
+        /// <summary>
+        /// 生成掉落物
+        /// </summary>
+        public void spawnDrop()
+        {
+            GameObject tempdrop = Instantiate(prefabDrop, transform.position, Quaternion.identity);
+            tempdrop.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityEngine.Random.Range(-1.5f, 1.5f), 5);
+        }
 
 
         private void OnDrawGizmos()
@@ -93,7 +108,7 @@ namespace PPman
         }
         private void Update()
         {
-             stateMachine.Updatestate();
+            stateMachine.Updatestate();
             WorktoUIpointHP.UpdatePosition(transform, offsetHP);
         }
         /// <summary>
@@ -125,6 +140,7 @@ namespace PPman
         {
             base.Damage(damage);
             StartCoroutine(Fadesystem.Fade(groupHP));
+            CameraManager.Instance.startshakeCamera(0.8f, 3, 0.3f);
         }
 
         protected override void Dead()
@@ -132,6 +148,7 @@ namespace PPman
             base.Dead();
             stateMachine.Switchstate(enemyDie);
             StartCoroutine(Delayfadeout());
+            CameraManager.Instance.startshakeCamera(1.5f, 1, 0.2f);
         }
 
         private IEnumerator Delayfadeout()
