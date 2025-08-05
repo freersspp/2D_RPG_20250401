@@ -17,6 +17,7 @@ namespace PPman
             player.Setvelocity(new Vector2(player.Rig.velocity.x, player.Jumpforce));
             player.Ani.SetBool("是否在地板上", false);
             player.Ani.SetFloat("跳躍", 1);
+            SoundManager.Instance.PlaySound(SoundType.PlayerJump, 0.6f, 1.3f);
 
         }
 

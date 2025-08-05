@@ -60,14 +60,7 @@ namespace PPman
         public float dropProbability { get; private set; } = 0.9f;
         [field: SerializeField] public GameObject prefabDrop;
 
-        /// <summary>
-        /// 生成掉落物
-        /// </summary>
-        public void spawnDrop()
-        {
-            GameObject tempdrop = Instantiate(prefabDrop, transform.position, Quaternion.identity);
-            tempdrop.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityEngine.Random.Range(-1.5f, 1.5f), 5);
-        }
+        
 
 
         private void OnDrawGizmos()
@@ -136,11 +129,23 @@ namespace PPman
             return Physics2D.OverlapBox(transform.position + transform.TransformDirection(checkplayeroffset), checkplayer, 0, layerplayer);
         }
 
+        /// <summary>
+        /// 生成掉落物
+        /// </summary>
+        public void spawnDrop()
+        {
+            GameObject tempdrop = Instantiate(prefabDrop, transform.position, Quaternion.identity);
+            tempdrop.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityEngine.Random.Range(-1.5f, 1.5f), 5);
+            SoundManager.Instance.PlaySound(SoundType.ItemDrop, 0.6f, 1.3f);
+        }
+
+
         protected override void Damage(float damage)
         {
             base.Damage(damage);
             StartCoroutine(Fadesystem.Fade(groupHP));
             CameraManager.Instance.startshakeCamera(0.8f, 3, 0.3f);
+            SoundManager.Instance.PlaySound(SoundType.EnemyHurt, 0.6f, 1.3f);
         }
 
         protected override void Dead()
@@ -149,6 +154,7 @@ namespace PPman
             stateMachine.Switchstate(enemyDie);
             StartCoroutine(Delayfadeout());
             CameraManager.Instance.startshakeCamera(1.5f, 1, 0.2f);
+            SoundManager.Instance.PlaySound(SoundType.EnemyDead, 0.6f, 1.3f);
         }
 
         private IEnumerator Delayfadeout()

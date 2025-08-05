@@ -21,6 +21,7 @@ namespace PPman
         {
             base.Exit();
             player.Ani.SetBool("是否在地板上", true);
+            SoundManager.Instance.PlaySound(SoundType.PlayerFall, 0.6f, 1.3f);
         }
 
         public override void Update()

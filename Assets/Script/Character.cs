@@ -102,7 +102,23 @@ namespace PPman
             Debug.Log($"<color=green>{name}死亡!</color>");
         }
 
-
-
+        #region 音效處理
+        /// <summary>
+        /// 播放音效
+        /// </summary>
+        /// <param name="soundType"></param>
+        private void PlaySound (SoundType soundType)
+        {
+            SoundManager.Instance.PlaySound(soundType);
+        } 
+        /// <summary>
+        /// 播放音效:隨機音量
+        /// </summary>
+        /// <param name="soundType"></param>
+        private void PlaySoundRandomvolume(SoundType soundType)
+        {
+            SoundManager.Instance.PlaySound(soundType, 0.6f, 1.3f);
+        }
+        #endregion
     }
 }

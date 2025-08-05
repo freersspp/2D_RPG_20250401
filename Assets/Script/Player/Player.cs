@@ -136,6 +136,7 @@ namespace PPman
         {
             base.Damage(damage);
             CameraManager.Instance.startshakeCamera(0.8f, 3, 0.3f);
+            SoundManager.Instance.PlaySound(SoundType.PlayerHurt, 0.6f, 1.3f);
         }
 
         protected override void Dead()
@@ -144,6 +145,7 @@ namespace PPman
             statemachine.Switchstate(player_Die);
             StartCoroutine(DelayfadeinBlack());
             CameraManager.Instance.startshakeCamera(1.5f, 1, 0.2f);
+            SoundManager.Instance.PlaySound(SoundType.PlayerDead, 0.6f, 1.3f);
         }
 
         private IEnumerator DelayfadeinBlack()
