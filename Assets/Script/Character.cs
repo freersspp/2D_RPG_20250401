@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,12 @@ namespace PPman
 
         protected float hp;
         protected Image ImgHP, ImgHPeven;
+
+        /// <summary>
+        /// 死亡事件
+        /// </summary>
+        public event Action onDead;
+
 
         protected virtual void Awake()
         {
@@ -100,6 +107,7 @@ namespace PPman
         protected virtual void Dead()
         {
             Debug.Log($"<color=green>{name}死亡!</color>");
+            onDead?.Invoke();
         }
 
         #region 音效處理

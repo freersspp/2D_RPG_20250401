@@ -60,7 +60,7 @@ namespace PPman
         public float dropProbability { get; private set; } = 0.9f;
         [field: SerializeField] public GameObject prefabDrop;
 
-        
+
 
 
         private void OnDrawGizmos()
@@ -137,6 +137,13 @@ namespace PPman
             GameObject tempdrop = Instantiate(prefabDrop, transform.position, Quaternion.identity);
             tempdrop.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityEngine.Random.Range(-1.5f, 1.5f), 5);
             SoundManager.Instance.PlaySound(SoundType.ItemDrop, 0.6f, 1.3f);
+        }
+
+        public void Respawn()
+        {
+            Ani.SetTrigger("觸發重生");
+            hp = hpmax;
+            stateMachine.Switchstate(enemyIdle);
         }
 
 
