@@ -12,7 +12,7 @@ namespace PPman
         bool active;
         private void Awake()
         {
-            player = GameObject.Find("主角").transform;
+            player = GameObject.Find("GameManager.PlayerName").transform;
             Invoke(nameof(Active), dalaytime);
         }
 

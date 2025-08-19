@@ -53,6 +53,9 @@ namespace PPman
 
         #endregion
 
+        public float hpmaxdata => hpmax;
+        public float hpdata => hp;
+
         private CanvasGroup groupBlack;
 
         //用程式自動在腳色底下繪製一個地板偵測器
@@ -153,6 +156,23 @@ namespace PPman
             yield return new WaitForSeconds(1);
             StartCoroutine(Fadesystem.Fade(groupBlack));
         }
+
+        private IEnumerator LoadplayerData()
+        {
+            yield return new WaitForSeconds(2);
+            SaveloadSystem.instance.LoadData();
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine (Fadesystem.Fade(groupBlack, false));
+        }
+
+        public void LoadHPUpdateUI(float _hpmax, float _hp)
+        {
+            hpmax = _hpmax;
+            hp = _hp;
+            ImgHP.fillAmount = hp / hpmax;
+            ImgHPeven.fillAmount = hp / hpmax;
+        }
+
     }
 
 

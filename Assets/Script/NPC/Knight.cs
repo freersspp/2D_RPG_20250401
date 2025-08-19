@@ -18,5 +18,10 @@ namespace PPman
             }
         }
 
+        public void LoadCount(int count)
+        {
+            已取得任務道具數量 = count;
+        }
+
     }
 }

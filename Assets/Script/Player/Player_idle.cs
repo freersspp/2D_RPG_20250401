@@ -21,6 +21,7 @@ namespace PPman
             player.GetComponent<CapsuleCollider2D>().size = new Vector2(0.75f,2.3f);
             player.GetComponent<CapsuleCollider2D>().offset = new Vector2(0f, 0f);
             //player.Rig.constraints = UnityEngine.RigidbodyConstraints2D.FreezeAll;
+            player.Setvelocity(player.transform.right * 0 + player.transform.up* player.Rig.velocity.y);
 
         }
 

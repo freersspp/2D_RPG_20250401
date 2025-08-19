@@ -79,7 +79,7 @@ namespace PPman
         protected override void Awake()
         {
             base.Awake();
-            player = GameObject.Find("主角").transform;
+            player = GameObject.Find(GameManager.PlayerName).transform;
             stateMachine = new StateMachine();
             enemyIdle = new EnemyIdle(this, stateMachine, "敵人待機");
             enemyFollow = new EnemyFollow(this, stateMachine, "敵人追蹤");

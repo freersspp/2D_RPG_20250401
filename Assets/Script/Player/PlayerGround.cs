@@ -22,6 +22,8 @@ namespace PPman
         {
             base.Update();
 
+            player.Ani.SetBool("是否在地板上", player.Isgrounded());
+
             if (player.canjump && player.Isgrounded() && Input.GetKeyDown(KeyCode.Space) && player.CanStandUp())
             {
                 statemachine.Switchstate(player.player_jump);
