@@ -15,7 +15,7 @@ namespace PPman
         private WorktoUIpoint uiInteraction;
         public bool isTalkbefore { get; set; }
 
-        public int 已取得任務道具數量 { get; set; }
+        public int 已取得任務道具數量 { get; protected set; }
         public int 任務道具需求數量 { get; set; } = 5;
         protected virtual void Awake()
         {

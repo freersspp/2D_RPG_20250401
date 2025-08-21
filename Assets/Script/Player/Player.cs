@@ -149,6 +149,7 @@ namespace PPman
             StartCoroutine(DelayfadeinBlack());
             CameraManager.Instance.startshakeCamera(1.5f, 1, 0.2f);
             SoundManager.Instance.PlaySound(SoundType.PlayerDead, 0.6f, 1.3f);
+            StartCoroutine(LoadplayerData());
         }
 
         private IEnumerator DelayfadeinBlack()

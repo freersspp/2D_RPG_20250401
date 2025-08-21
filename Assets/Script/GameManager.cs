@@ -7,7 +7,7 @@ namespace PPman
     public class GameManager : MonoBehaviour
     {
         public const string PlayerName = "主角";
-        public const string npc = "NPC騎士";
+        public const string npc_騎士 = "NPC騎士";
         
     }
 }

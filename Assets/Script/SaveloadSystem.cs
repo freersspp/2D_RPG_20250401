@@ -29,8 +29,7 @@ namespace PPman
         private const string DataName = "遊戲儲存資料";
 
         private Transform playertransform;
-        private Player player;
-        private NPC npc;
+        private Player player;        
         private Knight _knight;
 
 
@@ -38,7 +37,7 @@ namespace PPman
         {
             playertransform = GameObject.Find(GameManager.PlayerName).transform;
             player = GameObject.Find(GameManager.PlayerName).GetComponent<Player>();
-            npc = GameObject.Find(GameManager.npc).GetComponent<NPC>();
+            _knight = GameObject.Find(GameManager.npc_騎士).GetComponent<Knight>();
         }
 
         private void Start()
@@ -57,14 +56,16 @@ namespace PPman
                 LoadData();
             }
         }
-
+        /// <summary>
+        /// 將玩家資料儲存到本機端
+        /// </summary>
         public void SaveData()
         {
             PlayerData.Position = playertransform.position;
             PlayerData.Rotation = playertransform.eulerAngles;
             PlayerData.hpmax = player.hpmaxdata;
             PlayerData.hp = player.hpdata;
-            PlayerData.MissionCount = npc.已取得任務道具數量;
+            PlayerData.MissionCount = _knight.已取得任務道具數量;
 
             //將PlayerData轉檔為json模式, 容量小且讀取快速
             var json = JsonUtility.ToJson(PlayerData);
@@ -74,16 +75,22 @@ namespace PPman
             PlayerPrefs.SetString(DataName, json);
         }
 
+        /// <summary>
+        /// 從本機端讀取玩家資料並更新到遊戲物件上
+        /// </summary>
         public void LoadData()
         {
             //1. 從本機端讀檔案
             var json = PlayerPrefs.GetString(DataName);
+
             //2. 從json 轉回 PlayerData
             PlayerData = JsonUtility.FromJson<PlayerData>(json);
+
             //3. 將PlayerData轉到物件上
             playertransform.position = PlayerData.Position;
             playertransform.eulerAngles = PlayerData.Rotation;
             _knight.LoadCount(PlayerData.MissionCount);
+            player.LoadHPUpdateUI(PlayerData.hpmax, PlayerData.hp);
         }
     }
 }
