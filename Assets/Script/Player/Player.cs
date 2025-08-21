@@ -164,8 +164,15 @@ namespace PPman
             SaveloadSystem.instance.LoadData();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine (Fadesystem.Fade(groupBlack, false));
+            revival();
         }
 
+
+        private void revival()
+        {
+            Ani.SetTrigger("觸發重生");
+            statemachine.Switchstate(player_idle);
+        }
         public void LoadHPUpdateUI(float _hpmax, float _hp)
         {
             hpmax = _hpmax;
