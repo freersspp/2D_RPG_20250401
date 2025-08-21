@@ -24,20 +24,21 @@ namespace PPman
             //設定子按鈕
             //注意:這裡的按鈕名稱需要與Unity編輯器中的按鈕名稱一致
             //當用Find尋找物件時,可以用"XXXX/0000"來找標題是XXXX的子物件0000
-            btnSave = transform.Find("群組_設定按鈕群組/按鈕_儲存檔案").GetComponent<Button>();
-            btnLoad = transform.Find("群組_設定按鈕群組/按鈕_讀取檔案").GetComponent<Button>();
-            btnBacktomenu = transform.Find("群組_設定按鈕群組/按鈕_讀取檔案").GetComponent<Button>();
-            btnQuit = transform.Find("群組_設定按鈕群組/按鈕_讀取檔案").GetComponent<Button>();
+            btnSave = transform.Find("群組_設定按鈕群組/按鈕_儲存紀錄").GetComponent<Button>();
+            btnLoad = transform.Find("群組_設定按鈕群組/按鈕_讀取紀錄").GetComponent<Button>();
+            btnBacktomenu = transform.Find("群組_設定按鈕群組/按鈕_返回主頁面").GetComponent<Button>();
+            btnQuit = transform.Find("群組_設定按鈕群組/按鈕_返回遊戲").GetComponent<Button>();
+
             //設定按鈕點擊事件
             btnSetting.onClick.AddListener(OnSettingButtonClick);
-
 
         }
 
         private void OnSettingButtonClick()
         {
             isSettingOpen = !isSettingOpen;
-            StartCoroutine(Fadesystem.Fade(group,isSettingOpen));
+            Time.timeScale = isSettingOpen ? 0 : 1; //暫停或恢復遊戲
+            StartCoroutine(Fadesystem.FadeRealtime(group, isSettingOpen));
         }
     }
 }
