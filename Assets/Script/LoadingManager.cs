@@ -11,19 +11,53 @@ namespace PPman
     /// </summary>
     public class LoadingManager : MonoBehaviour
     {
+        private static LoadingManager _instance;
+        public static LoadingManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType <LoadingManager> ();
+                }
+                return _instance;
+            }
+        }
+
         private CanvasGroup group;
         private TMP_Text textPercent;
         private Image imgLoadingbar;
 
         private void Awake()
         {
+            if(_instance == null)
+            {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else if(_instance != this)
+            {
+                Destroy(gameObject);
+            }
             group = GetComponent<CanvasGroup>();
             textPercent = transform.Find("文字_載入系統_百分比").GetComponent<TMP_Text>();
             imgLoadingbar = transform.Find("圖片_載入系統_進度條").GetComponent<Image>();
         }
 
+        public void StartLoading(string sceneName)
+        {
+            StartCoroutine(Loading(sceneName));
+        }
+
+
+        /// <summary>
+        /// 載入場景
+        /// </summary>
+        /// <param name="sceneName">場景名稱</param>
+        /// <returns></returns>
         private IEnumerator Loading(string sceneName)
         {
+            yield return StartCoroutine(Fadesystem.FadeRealtime(group));
             // 非同步載入設定 ao = 場景管理器 的 非同步 載入(場景名稱);
             AsyncOperation ao = SceneManager.LoadSceneAsync(sceneName);
             // 確保載入場景時不會自動啟用
@@ -46,6 +80,9 @@ namespace PPman
 
 
             }
+
+            yield return new WaitForSecondsRealtime(0.5f);
+            yield return StartCoroutine(Fadesystem.FadeRealtime(group, false));
 
         }
 
