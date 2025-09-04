@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace PPman
@@ -8,6 +9,10 @@ namespace PPman
     /// </summary>
     public class StartSceneManager : MonoBehaviour
     {
+        [SerializeField]private AudioMixer audioMixer ;
+
+        private const string volumeMain = "VolumeMain", volumeBGM = "VolumeBGM", volumeSFX = "VolumeSFX";
+
         private CanvasGroup groupsetting;
         private Button btnload, btnstart, btnsetting, btnquit, btnsettingBack;
         private Slider sliderMain, sliderBGM, sliderSfx;
@@ -31,10 +36,14 @@ namespace PPman
             btnsettingBack.onClick.AddListener(SettingBack);
             btnquit.onClick.AddListener(Quit);
 
+            sliderMain.onValueChanged.AddListener((x) => SetVolume(volumeMain,x));
+            sliderBGM.onValueChanged.AddListener((x) => SetVolume(volumeBGM, x));
+            sliderSfx.onValueChanged.AddListener((x) => SetVolume(volumeSFX, x));
+
         }
         private void LoadGame()
         {
-            LoadingManager.Instance.StartLoading("遊戲場景");
+            LoadingManager.Instance.StartLoadingandLoadData("遊戲場景");
         }
         private void StartGame()
         {
@@ -52,5 +61,12 @@ namespace PPman
         {
             Application.Quit();
         }
+
+        private void SetVolume(string par, float value)
+        {
+            audioMixer.SetFloat(par, value);
+        }
+
+
     }
 }

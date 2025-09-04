@@ -28,16 +28,14 @@ namespace PPman
         //儲存檔案名: 在這邊列舉數目等同於玩家可以儲存資料的筆數
         private const string DataName = "遊戲儲存資料";
 
-        private Transform playertransform;
-        private Player player;        
-        private Knight _knight;
+        private Transform playertransform =>GameObject.Find(GameManager.PlayerName).transform ;
+        private Player player =>GameObject.Find(GameManager.PlayerName).GetComponent<Player>() ;        
+        private Knight _knight =>GameObject.Find(GameManager.npc_騎士).GetComponent<Knight>() ;
 
 
         private void Awake()
         {
-            playertransform = GameObject.Find(GameManager.PlayerName).transform;
-            player = GameObject.Find(GameManager.PlayerName).GetComponent<Player>();
-            _knight = GameObject.Find(GameManager.npc_騎士).GetComponent<Knight>();
+           
         }
 
         private void Start()

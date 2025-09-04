@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 namespace PPman
 {
@@ -49,13 +50,16 @@ namespace PPman
             StartCoroutine(Loading(sceneName));
         }
 
+        public void StartLoadingandLoadData(string sceneName)
+        { StartCoroutine(Loading(sceneName,SaveloadSystem.instance.LoadData));}
+
 
         /// <summary>
         /// 載入場景
         /// </summary>
         /// <param name="sceneName">場景名稱</param>
         /// <returns></returns>
-        private IEnumerator Loading(string sceneName)
+        private IEnumerator Loading(string sceneName, Action afterLoading = null)
         {
             yield return StartCoroutine(Fadesystem.FadeRealtime(group));
             // 非同步載入設定 ao = 場景管理器 的 非同步 載入(場景名稱);
@@ -82,6 +86,8 @@ namespace PPman
             }
 
             yield return new WaitForSecondsRealtime(0.5f);
+            //如果有載入完成後的事件就呼叫
+            afterLoading?.Invoke();
             yield return StartCoroutine(Fadesystem.FadeRealtime(group, false));
 
         }
